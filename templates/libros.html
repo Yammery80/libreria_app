@@ -1,4 +1,29 @@
-<table>
+{% extends 'bootstrap/base.html' %}
+{% block head %}
+    {{ super() }}
+    <title>
+        {% block title %}
+            Biblioteca Web App
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="../static/style/style.css">
+ <!-- <link rel="stylesheet" href=""> // aqui puedo conectar mi hoja de estilo -->
+{% endblock %}
+{% block body %}
+
+    {% block navbar %}
+        {% include 'navbar.html' %}
+    {% endblock %}
+
+    {% block content %}
+<table class="table table-success table-striped">
+    <tr>
+        <th scope="col">No.</th>
+        <th scope="col">Titulo</th>
+        <th scope="col">Nombre del autor</th>
+        <th scope="col">Apellido del autor</th>
+        <th scope="col">Editorial</th>
+    </tr>
     {% for fila in datos %}
     <tr>
         <td>{{fila[0]}}</td>
@@ -9,3 +34,6 @@
     </tr>
     {% endfor %}
 </table>
+{% endblock %}
+
+{% endblock %}
