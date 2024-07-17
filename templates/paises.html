@@ -1,4 +1,5 @@
 {% extends 'bootstrap/base.html' %}
+
 {% block head %}
     {{ super() }}
     <title>
@@ -7,10 +8,9 @@
         {% endblock %}
     </title>
     <link rel="stylesheet" href="../static/style/style.css">
- <!-- <link rel="stylesheet" href=""> // aqui puedo conectar mi hoja de estilo -->
 {% endblock %}
-{% block body %}
 
+{% block body %}
     {% block navbar %}
         {% include 'navbar.html' %}
     {% endblock %}
@@ -19,20 +19,36 @@
     <h2>Listado de países</h2>
         <div class="container-fluid">
             <table class="table table-success table-striped">
-                <tr>
-                    <th scope="col">ID País</th>
-                    <th scope="col">Nombre País</th>
-                </tr>
-                {% for pais in datos %}
-                <tr>
-                    <td>{{pais[0]}}</td>
-                    <td>{{pais[1]}}</td>
-                    <td>
-                        <form action="{{ url_for('update1_pais', idpais=pais[0] )}}" method="POST">
-                            <button type="submit" class="btn btn-primary">Editar</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form action="{{ url_for('delete_pais', idpais=pais[0] )}}" method="POST">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
+                <thead>
+                    <tr>
+                        <th scope="col">ID País</th>
+                        <th scope="col">Nombre País</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pais in datos %}
+                    <tr>
+                        <td>{{ pais[0] }}</td>
+                        <td>{{ pais[1] }}</td>
+                        <td>
+                            <form action="{{ url_for('update1_pais', idpais=pais[0]) }}" method="POST">
+                                <button type="submit" class="btn btn-primary">Editar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ url_for('delete_pais', idpais=pais[0]) }}" method="POST">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">No se encontraron países.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endblock %}
+{% endblock %}

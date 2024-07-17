@@ -1,5 +1,5 @@
 import psycopg2
-from flask import Flask, redirect, render_template, url_for
+from flask import Flask, request, redirect, render_template, request, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import PasswordField, StringField, SubmitField
@@ -93,9 +93,8 @@ def delete_pais(idpais):
     conexion.close()
     return redirect(url_for ('index'))
 
-@app.route('/update1_pais/<int:idpais>', methods=['GET','POST'])
+@app.route('/update1_pais/<int:idpais>', methods=['POST'])
 def update1_pais(idpais):
-    #Conectar con DB(DataBase)
     conexion = psycopg2.connect(
         database="biblioteca",
         user="postgres",
@@ -103,10 +102,12 @@ def update1_pais(idpais):
         host="localhost",
         port="5432"
     )
-    # Crear un cursor (objeto para recorrer las tablas)
+    # crear un cursor (objeto para recorrer las tablas)
     cursor = conexion.cursor()
-    #Recuperar el registro del id_pais seleccionado
-    cursor.execute('SELECT * FROM pais WHERE id_pais=%s', (idpais,))
+    # recuperar el registro del id_pais seleccionado
+    cursor.execute('''SELECT * FROM pais WHERE idpais=%s''',
+                   (idpais,))
+    datos= cursor.fetchall()
     cursor.close()
     conexion.close()
-    return redirect(url_for ('update2'))
+    return render_template ('editar_pais.html', datos=datos)
