@@ -21,9 +21,9 @@
             <br>
             <form action=""method="post">
                 {% for pais in datos %}
-                    <input type="hidden" name="id" value="{{datos[0]}}">
+                    <input type="hidden" name="id" value="{{pais[0]}}">
                     <label for="nombre">Nombre del pais</label>
-                    <input type="text" name="nombre" value="{{datos[1]}}">
+                    <input type="text" name="nombre" value="{{pais[1]}}">
                     <input type="submit" value="Actualizar">
                     <a href="{{url_for('index')}}">Cancelar</a>
                 {% endfor %}
