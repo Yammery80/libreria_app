@@ -6,6 +6,15 @@
     <title>Biblioteca Web App - Insertar libro</title>
 </head>
 <body>
-    
+    <div class="container-fluid">
+        <h2>Agregar nuevo libro</h2>
+        <form action="post">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.titulo.label(class="form_control-label") }}
+                {{ form.titulo(class="form-control") }}
+            </div>
+        </form>
+    </div>
 </body>
 </html>
