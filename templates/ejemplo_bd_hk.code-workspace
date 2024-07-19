@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../ejemplo_bd_hk"
+		},
+		{
+			"path": "../static"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
